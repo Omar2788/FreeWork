@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Projet2nd.Models.Service>
+
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nameService)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descriptionService)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prixService)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.imageService)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.etatService)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameService)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.descriptionService)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prixService)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.imageService)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.etatService)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdService">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdService">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,50 @@
+﻿@model Projet2nd.Models.Service
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Are you sure you want to delete this Service?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nameService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nameService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.descriptionService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.descriptionService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.prixService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.prixService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.imageService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.imageService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.etatService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.etatService)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="IdService" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,36 @@
+﻿@model List<Service>
+
+
+<div class="container">
+    <h2 class="text-center mb-4">Discover Our Services</h2>
+    @if (ViewBag.IsVendeur || !User.Identity.IsAuthenticated)
+    {
+        <div class=" mb-3 text-right">
+            <a href="@Url.Action("create", "Service")" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add Service</a>
+    </div>
+    }
+<div class="row">
+        
+    @foreach (var service in Model)
+    {
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="@service.imageService" class="card-img-top" alt="Service Image"> <!-- Image tag here -->
+                <div class="card-body">
+                    <h5 class="card-title">@service.nameService</h5>
+                    <p class="card-text">@service.descriptionService</p>
+                    <p class="card-text">Price: @service.prixService</p>
+                    <p class="card-text">Status: @service.etatService</p>
+                        <form action="@Url.Action("Details", "Home",new { id = service.IdService })" method="get">
+                            <input type="hidden" name="serviceId" value="@service.IdService" />
+                            @if (!ViewBag.IsVendeur)
+                            {
+                                <button type="submit" class="btn btn-outline-dark"><i class="bi bi-bag"></i> Buy</button>
+                            }
+                        </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+</div>

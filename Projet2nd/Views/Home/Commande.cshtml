@@ -1,0 +1,23 @@
+﻿@model List<Projet2nd.Models.Service>
+
+<h2>Commande</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Les Commandes achetés</th>
+            <!-- Add other facture properties as needed -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var service in Model)
+        {
+            <tr>
+                <td>@service.nameService</td>
+                <td>@service.descriptionService</td>
+                <td>@service.prixService</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>

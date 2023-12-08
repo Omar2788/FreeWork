@@ -1,0 +1,62 @@
+﻿@model Projet2nd.Models.Service
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Service</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.nameService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nameService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.descriptionService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.descriptionService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.prixService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.prixService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.imageService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.imageService)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.etatService)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.etatService)
+        </dd>
+        
+    </dl>
+</div>
+<div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form action="@Url.Action("ConfirmPurchase", "Home")" method="post">
+            <input type="hidden" name="serviceId" value="@Model.IdService" />
+            <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+        </form>
+    }
+    else
+    {
+        <p>Please <a href="https://localhost:7002/Identity/Account/Login">login</a> to confirm the purchase.</p>
+    }
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

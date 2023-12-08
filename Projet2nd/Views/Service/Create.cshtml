@@ -1,0 +1,60 @@
+﻿@model Projet2nd.Models.Service
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4>Create Service</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+         @if (User.Identity.IsAuthenticated)
+        {
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nameService" class="control-label"></label>
+                <input asp-for="nameService" class="form-control" />
+                <span asp-validation-for="nameService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descriptionService" class="control-label"></label>
+                <input asp-for="descriptionService" class="form-control" />
+                <span asp-validation-for="descriptionService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="prixService" class="control-label"></label>
+                <input asp-for="prixService" class="form-control" />
+                <span asp-validation-for="prixService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="imageService" class="control-label"></label>
+                <input asp-for="imageService" class="form-control" />
+                <span asp-validation-for="imageService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="etatService" class="control-label"></label>
+                <input asp-for="etatService" class="form-control" />
+                <span asp-validation-for="etatService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        }
+        else
+        {
+            <p>Please <a href="https://localhost:7002/Identity/Account/Login">login</a> to add a service.</p>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
