@@ -9,44 +9,54 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+    <div class="col-md-8">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdService" />
             <div class="form-group">
-                <label asp-for="nameService" class="control-label"></label>
+                <label asp-for="nameService" class="control-label">Service Name</label>
                 <input asp-for="nameService" class="form-control" />
                 <span asp-validation-for="nameService" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="descriptionService" class="control-label"></label>
+                <label asp-for="descriptionService" class="control-label">Service Description</label>
                 <input asp-for="descriptionService" class="form-control" />
                 <span asp-validation-for="descriptionService" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="prixService" class="control-label"></label>
+                <label asp-for="prixService" class="control-label">Service Price</label>
                 <input asp-for="prixService" class="form-control" />
                 <span asp-validation-for="prixService" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="imageService" class="control-label"></label>
-                <input asp-for="imageService" class="form-control" />
-                <span asp-validation-for="imageService" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="etatService" class="control-label"></label>
-                <input asp-for="etatService" class="form-control" />
+                <label asp-for="etatService" class="control-label">Service Status</label>
+                <select asp-for="etatService" class="form-control">
+                    <option value="dispo">Available</option>
+                    <option value="Not available">Not available</option>
+                </select>
                 <span asp-validation-for="etatService" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group" style="margin-top:15px;">
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </form>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="imageService" class="control-label">Service Photo</label>
+            <img src="@Url.Content($"~/uploads/{Model.imageService}")" alt="Current Image" style="max-width: 200px; max-height: 200px;" />
+            <br />
+            <span class="text-muted">Current Image</span>
+            <br />
+            <input asp-for="ImageFile" type="file" class="form-control" />
+            <span asp-validation-for="imageService" class="text-danger"></span>
+        </div>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index"><i class="bi bi-arrow-left-circle"></i> Back to List</a>
 </div>
 
 @section Scripts {

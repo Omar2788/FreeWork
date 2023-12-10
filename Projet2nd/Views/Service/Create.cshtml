@@ -4,43 +4,57 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .info-paragraph {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        margin-bottom: 15px;
+    }
 
+        .info-paragraph strong {
+            color: #00796b;
+        }
+</style>
 
-<h4>Create Service</h4>
+<h4>Create New Service</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
          @if (User.Identity.IsAuthenticated)
         {
-        <form asp-action="Create">
+            <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="nameService" class="control-label"></label>
+                <label asp-for="nameService" class="control-label">Service Name</label>
                 <input asp-for="nameService" class="form-control" />
                 <span asp-validation-for="nameService" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="descriptionService" class="control-label"></label>
+                <label asp-for="descriptionService" class="control-label">Service Description</label>
                 <input asp-for="descriptionService" class="form-control" />
                 <span asp-validation-for="descriptionService" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="prixService" class="control-label"></label>
+                <label asp-for="prixService" class="control-label">Service Price</label>
                 <input asp-for="prixService" class="form-control" />
                 <span asp-validation-for="prixService" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="imageService" class="control-label"></label>
-                <input asp-for="imageService" class="form-control" />
-                <span asp-validation-for="imageService" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="etatService" class="control-label"></label>
-                <input asp-for="etatService" class="form-control" />
-                <span asp-validation-for="etatService" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <div class="form-group">
+                    <label asp-for="imageService" class="control-label">Service Photo</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" />
+                    <span asp-validation-for="imageService" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="etatService" class="control-label">Service Status</label>
+                    <select asp-for="etatService" class="form-control">
+                        <option value="dispo">Available</option>
+                        <option value="Not available">Not available</option>
+                    </select>
+                    <span asp-validation-for="etatService" class="text-danger"></span>
+                </div>
+            <div class="form-group" style="margin-top:10px;">
+                    <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
         }
@@ -49,12 +63,21 @@
             <p>Please <a href="https://localhost:7002/Identity/Account/Login">login</a> to add a service.</p>
         }
     </div>
+    <div class="col-md-8">
+        <p class="info-paragraph">
+            <strong>Welcome to our platform!</strong> By adding your services, you can reach a broader audience and connect with potential clients. Share details about what you offer, set a competitive price, and showcase your expertise. Your services contribute to creating a vibrant and diverse marketplace. <strong>Start adding your services today!</strong>
+        </p>
+        <p class="info-paragraph">
+            If you have any questions or need assistance, feel free to contact our support team.
+        </p>
+    </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+@if (User.Identity.IsAuthenticated)
+        {
+            <div>
+        <a asp-action="Index"><i class="bi bi-arrow-left-circle"></i> Back to List of Services</a>
+            </div>
+        }
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Projet2nd.Areas.Identity.Data;
 using Projet2nd.Models;
@@ -50,13 +51,32 @@ namespace Projet2nd.Controllers
                     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                     service.idUser = userId;
 
-                    if (context.Services.Where(x => x.nameService == service.nameService).Count() > 0)
-                    {
-                        ViewBag.error = "le service existe";
-                        return View(service);
-                    }
+                if (context.Services.Where(x => x.nameService == service.nameService).Count() > 0)
+                {
+                    ViewBag.error = "le service existe";
+                    return View(service);
+                }
+                if (service.ImageFile != null && service.ImageFile.Length > 0)
+                {
+                    // Enregistrez l'image sur le serveur
 
-                    context.Services.Add(service);
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(service.ImageFile.FileName);
+                    var filePath = Path.Combine("wwwroot/uploads", fileName);
+
+
+                    using (var Stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        service.ImageFile.CopyTo(Stream);
+
+                    }
+                    service.imageService = fileName;
+
+                }
+                if (string.IsNullOrEmpty(service.etatService))
+                {
+                    service.etatService = "Available";
+                }
+                context.Services.Add(service);
                     context.SaveChanges();
 
                     // Check the user's role and set ViewBag.IsVendeur
@@ -88,6 +108,22 @@ namespace Projet2nd.Controllers
         {
             try
             {
+                if (service.ImageFile != null && service.ImageFile.Length > 0)
+                {
+                    // Enregistrez l'image sur le serveur
+
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(service.ImageFile.FileName);
+                    var filePath = Path.Combine("wwwroot/uploads", fileName);
+
+
+                    using (var Stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        service.ImageFile.CopyTo(Stream);
+
+                    }
+                    service.imageService = fileName;
+
+                }
                 Service serv = context.Services.Find(id);
                 serv.nameService = service.nameService;
                 serv.prixService = service.prixService;
@@ -133,7 +169,25 @@ namespace Projet2nd.Controllers
             }
         }
 
+        public IActionResult PurchasedServices()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            var purchasedServices = context.Commande
+                .Where(commande => context.Services.Any(service => service.IdService == commande.ServiceId && service.idUser == userId))
+                .Select(commande => new PurchasedServiceViewModel
+                {
+                    ServiceId = commande.ServiceId,
+                    ServiceName = commande.Service.nameService,
+                    ServiceDescription = commande.Service.descriptionService,
+                    ServicePrice = commande.Service.prixService,
+                    BuyerUsername = context.Users.Where(user => user.Id == commande.UserId).Select(user => user.UserName).FirstOrDefault(),
+                    
+                })
+                .ToList();
+
+            return View(purchasedServices);
+        }
 
     }
 }

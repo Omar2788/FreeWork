@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projet2nd.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using Projet2nd.Areas.Identity.Data;
 namespace Projet2nd.Migrations
 {
     [DbContext(typeof(Projet2ndContext))]
-    partial class Projet2ndContextModelSnapshot : ModelSnapshot
+    [Migration("20231210134418_v3")]
+    partial class v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -16,6 +16,8 @@ public class Projet2ndContext : IdentityDbContext<Projet2ndUser>
     public virtual DbSet<Service> Services { get; set; }
 
     public virtual DbSet<Commande> Commande { get; set; }
+
+    public virtual DbSet<PurchasedServiceViewModel> PurchasedServiceViewModel { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

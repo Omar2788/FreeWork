@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projet2nd.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using Projet2nd.Areas.Identity.Data;
 namespace Projet2nd.Migrations
 {
     [DbContext(typeof(Projet2ndContext))]
-    partial class Projet2ndContextModelSnapshot : ModelSnapshot
+    [Migration("20231209104834_v2.2")]
+    partial class v22
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -250,38 +253,6 @@ namespace Projet2nd.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Commande");
-                });
-
-            modelBuilder.Entity("Projet2nd.Models.PurchasedServiceViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BuyerUsername")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ServiceDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServiceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ServiceName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ServicePrice")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PurchasedServiceViewModel");
                 });
 
             modelBuilder.Entity("Projet2nd.Models.Service", b =>

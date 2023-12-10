@@ -16,6 +16,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
 a{
     color:sienna;
     text-decoration:none;
@@ -23,3 +24,7 @@ a{
     a:hover {
         color: #d64500;
     }
+.footer {
+    background-color: gray;
+    padding: 0;
+}

@@ -15,11 +15,11 @@
     {
         <div class="col-md-4 mb-3">
             <div class="card">
-                <img src="@service.imageService" class="card-img-top" alt="Service Image"> <!-- Image tag here -->
+                    <img src="@Url.Content($"~/uploads/{service.imageService}")" class="card-img-top" alt="Service Image" style="height: 250px; width: 300px;margin-left: auto;margin-right: auto;">
                 <div class="card-body">
                     <h5 class="card-title">@service.nameService</h5>
                     <p class="card-text">@service.descriptionService</p>
-                    <p class="card-text">Price: @service.prixService</p>
+                    <p class="card-text">Price: @service.prixService Dt</p>
                     <p class="card-text">Status: @service.etatService</p>
                         <form action="@Url.Action("Details", "Home",new { id = service.IdService })" method="get">
                             <input type="hidden" name="serviceId" value="@service.IdService" />

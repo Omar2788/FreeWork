@@ -113,6 +113,11 @@ namespace Projet2nd.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                if (Input.Email == "admin" && Input.Password == "admin")
+                {
+                    // Redirect to a different page for the admin
+                    return RedirectToPage("/Admin/AllServices");
+                }
 
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
          
@@ -121,6 +126,8 @@ namespace Projet2nd.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
+
+
                 }
                 if (result.RequiresTwoFactor)
                 {

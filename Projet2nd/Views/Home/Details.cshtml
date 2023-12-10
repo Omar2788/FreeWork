@@ -5,38 +5,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h3>Purchase Confirmation</h3>
+<p>Thank you for choosing our service! Please review the details below and confirm your purchase.</p>
 
 <div>
-    <h4>Service</h4>
+    
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nameService)
+            @Html.DisplayName("Service Name")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.nameService)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.descriptionService)
+            @Html.DisplayName("Service Description")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.descriptionService)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.prixService)
+            @Html.DisplayName("Service Price")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.prixService)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.imageService)
+            @Html.DisplayName("Service Photo")
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.imageService)
+            <img src="@Url.Content($"~/uploads/{Model.imageService}")" alt="Service Image" style="max-width: 200px; max-height: 200px;" />
+
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.etatService)
+            @Html.DisplayName("Service Status")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.etatService)
@@ -49,7 +51,7 @@
     {
         <form action="@Url.Action("ConfirmPurchase", "Home")" method="post">
             <input type="hidden" name="serviceId" value="@Model.IdService" />
-            <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-circle"></i> Confirm Purchase</button>
         </form>
     }
     else
@@ -58,5 +60,5 @@
     }
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index"><i class="bi bi-arrow-left-circle"></i> Back to List</a>
 </div>

@@ -128,6 +128,27 @@ public class HomeController : Controller
         return View(userServices);
     }
 
+    [HttpPost]
+    public IActionResult Search(string termeRecherche)
+    {
+        var isVendeur = User.IsInRole("vendeur");
+        List<Service> services = context.Services.ToList();
 
+        TempData["IsAddingService"] = isVendeur ? 1 : 0;
 
+        ViewBag.IsVendeur = isVendeur;
+        var servicesCorrespondants = services
+            .Where(s =>
+                s.nameService.Contains(termeRecherche) ||
+                s.descriptionService.Contains(termeRecherche) ||
+                s.prixService.Contains(termeRecherche) ||
+                s.etatService.Contains(termeRecherche))
+            .ToList();
+
+        return View("Index", servicesCorrespondants);
+    }
+    public IActionResult Help()
+    {
+       return View();
+    }
 }

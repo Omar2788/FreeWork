@@ -5,28 +5,29 @@
     
 }
 
-<h1>Index</h1>
+<h1>Your Services</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success" style="float: right;margin-bottom: 30px;"><i class="bi bi-plus-circle"></i> Create New Service</a>
 </p>
-<table class="table">
+<table class="table" style="background-color:white;border-radius:15px;">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.nameService)
+                
+                @Html.DisplayName("Service Name")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.descriptionService)
+                @Html.DisplayName("Service Description")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.prixService)
+                @Html.DisplayName("Service Price")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.imageService)
+                @Html.DisplayName("Service Photo")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.etatService)
+                @Html.DisplayName("Service Status")
             </th>
             <th></th>
         </tr>
@@ -44,14 +45,14 @@
                 @Html.DisplayFor(modelItem => item.prixService)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.imageService)
+                    <img src="@Url.Content($"~/uploads/{item.imageService}")" alt="Service Image" style="max-width: 100px;" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.etatService)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdService">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdService">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.IdService" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdService" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Delete</a>
             </td>
         </tr>
 }

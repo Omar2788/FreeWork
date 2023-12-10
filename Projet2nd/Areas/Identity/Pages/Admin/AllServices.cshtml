@@ -1,0 +1,136 @@
+﻿@page
+@model Projet2nd.Areas.Identity.Pages.Admin.AllServicesModel
+@{
+    ViewData["Title"] = "All Services";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h3 {
+            color: #00796b;
+            margin-top: 20px;
+        }
+
+        .card {
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+            .card:hover {
+                transform: scale(1.02);
+            }
+
+        .card-img-top {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .btn-secondary {
+            background-color: #00796b;
+            border-color: #00796b;
+            color: #fff;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size:20px;
+            border-radius:5px;
+            cursor: pointer;
+        }
+
+        .btn-danger {
+            background-color: red;
+            border-color: red;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            
+        }
+
+        .mt-3 {
+            margin-top: 15px;
+        }
+
+        .row {
+            margin: 0 -15px;
+        }
+
+        .col-md-4 {
+            padding: 0 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logout form -->
+    <form method="post" asp-page="/Logout">
+        <button type="submit" class="btn btn-secondary mt-3">Logout</button>
+    </form>
+
+    <div class="container">
+        <h3>Hello Administrator! This is all the services in your platform</h3>
+
+        @if (Model.Services.Any())
+        {
+            <div class="row">
+                @foreach (var service in Model.Services)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img src="@Url.Content($"~/uploads/{service.imageService}")" class="card-img-top" alt="Service Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@service.nameService</h5>
+                                <p class="card-text">@service.descriptionService</p>
+                                <p class="card-text">Price: @service.prixService</p>
+                                <form method="post" asp-page-handler="Delete" asp-route-serviceId="@service.IdService">
+                                    <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No services available.</p>
+        }
+    </div>
+
+</body>
+</html>

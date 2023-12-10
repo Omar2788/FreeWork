@@ -1,0 +1,30 @@
+﻿@model List<Projet2nd.Models.PurchasedServiceViewModel>
+
+<h2>Purchased Services</h2>
+<p>
+    Thank you for choosing our plateform! Here are the details of the services you have sold.
+</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Service Name</th>
+            <th>Service Description</th>
+            <th>Price</th>
+            <th>Buyer Username</th>
+          
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var purchasedService in Model)
+        {
+            <tr>
+                <td>@purchasedService.ServiceName</td>
+                <td>@purchasedService.ServiceDescription</td>
+                <td>@purchasedService.ServicePrice Dt</td>
+                <td>@purchasedService.BuyerUsername</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
