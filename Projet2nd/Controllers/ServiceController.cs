@@ -108,28 +108,28 @@ namespace Projet2nd.Controllers
         {
             try
             {
+                Service existingService = context.Services.Find(id);
+
                 if (service.ImageFile != null && service.ImageFile.Length > 0)
                 {
-                    // Enregistrez l'image sur le serveur
-
+                    // Save the new image to the server
                     var fileName = Guid.NewGuid().ToString() + Path.GetExtension(service.ImageFile.FileName);
                     var filePath = Path.Combine("wwwroot/uploads", fileName);
 
-
-                    using (var Stream = new FileStream(filePath, FileMode.Create))
+                    using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        service.ImageFile.CopyTo(Stream);
-
+                        service.ImageFile.CopyTo(stream);
                     }
-                    service.imageService = fileName;
 
+                    // Update the imageService property with the new file name
+                    existingService.imageService = fileName;
                 }
-                Service serv = context.Services.Find(id);
-                serv.nameService = service.nameService;
-                serv.prixService = service.prixService;
-                serv.etatService = service.etatService;
-                serv.descriptionService = service.descriptionService;
-                serv.imageService = service.imageService;
+
+                // Update other properties
+                existingService.nameService = service.nameService;
+                existingService.prixService = service.prixService;
+                existingService.etatService = service.etatService;
+                existingService.descriptionService = service.descriptionService;
 
                 context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -139,6 +139,7 @@ namespace Projet2nd.Controllers
                 return View();
             }
         }
+
 
         // GET: ServiceController/Delete/5
         public ActionResult Delete(int id)

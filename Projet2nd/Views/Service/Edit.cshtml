@@ -31,27 +31,47 @@
 
             <div class="form-group">
                 <label asp-for="etatService" class="control-label">Service Status</label>
-                <select asp-for="etatService" class="form-control">
-                    <option value="dispo">Available</option>
-                    <option value="Not available">Not available</option>
-                </select>
+                <div class="form-check">
+                    <input asp-for="etatService" class="form-check-input" type="radio" value="Available" checked />
+                    <label class="form-check-label">Available</label>
+                </div>
+
+                <div class="form-check">
+                    <input asp-for="etatService" class="form-check-input" type="radio" value="Not-Available" />
+                    <label class="form-check-label">Not Available</label>
+                </div>
+
                 <span asp-validation-for="etatService" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="imageService" class="control-label">Service Photo</label>
+                <img src="@Url.Content($"~/uploads/{Model.imageService}")" alt="Current Image" style="max-width: 200px; max-height: 200px;" />
+                <br />
+                
+                <br />
+                <input type="checkbox" id="changeImage" name="changeImage" />
+                <label for="changeImage">Change Photo</label>
+                <br />
+                <input asp-for="ImageFile" type="file" class="form-control" id="fileInput" disabled />
+                <span asp-validation-for="imageService" class="text-danger"></span>
+            </div>
+
+            <script>
+                document.getElementById('changeImage').addEventListener('change', function () {
+                    var fileInput = document.getElementById('fileInput');
+                    fileInput.disabled = !this.checked;
+                });
+            </script>
+
+
+
             <div class="form-group" style="margin-top:15px;">
                 <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </form>
     </div>
     <div class="col-md-4">
-        <div class="form-group">
-            <label asp-for="imageService" class="control-label">Service Photo</label>
-            <img src="@Url.Content($"~/uploads/{Model.imageService}")" alt="Current Image" style="max-width: 200px; max-height: 200px;" />
-            <br />
-            <span class="text-muted">Current Image</span>
-            <br />
-            <input asp-for="ImageFile" type="file" class="form-control" />
-            <span asp-validation-for="imageService" class="text-danger"></span>
-        </div>
+       
     </div>
 </div>
 

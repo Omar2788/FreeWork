@@ -1,0 +1,84 @@
+﻿@page
+@model Projet2nd.Areas.Identity.Pages.Admin.UserManagementModel
+@{
+    ViewData["Title"] = "User Management :";
+    Layout = null; // Set layout to null to remove the default layout
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #495057;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h3 {
+            color: #00796b;
+            margin-top: 20px;
+        }
+
+        .user-list {
+            margin-top: 20px;
+        }
+
+        .user-item {
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+            .user-item:hover {
+                transform: scale(1.02);
+            }
+
+        .btn-danger {
+            background-color: red;
+            border-color: red;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Your existing user management content here -->
+    <div class="container">
+        <h3>User Management</h3>
+
+        @if (Model.Users.Any())
+        {
+            <div class="user-list">
+                @foreach (var user in Model.Users)
+                {
+                    <div class="user-item">
+                        <p><strong>User Name:</strong> @user.Name</p>
+                        <p><strong>Email:</strong> @user.Email</p>
+                        <form method="post" asp-page-handler="DeleteUser" asp-route-userId="@user.Id">
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i> Delete User</button>
+                        </form>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No users available.</p>
+        }
+    </div>
+
+</body>
+</html>

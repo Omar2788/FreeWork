@@ -104,20 +104,27 @@ public class HomeController : Controller
 
             commande.UserId = userId;
             commande.ServiceId = serviceId;
-
+           
             context.Commande.Add(commande);
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(CommandeConfirmer));
         }
         else
         {
             return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("ConfirmPurchase", "Home", new { serviceId = serviceId }) });
         }
     }
+    public IActionResult CommandeConfirmer(int commandeId)
+    {
+
+        Commande commande = context.Commande.Find(commandeId);
 
 
-    public ActionResult Commande()
+        return View("CommandeConfirmer", commande);
+    }
+
+        public ActionResult Commande()
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 

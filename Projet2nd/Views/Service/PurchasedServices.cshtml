@@ -8,6 +8,7 @@
 <table class="table">
     <thead>
         <tr>
+            
             <th>Service Name</th>
             <th>Service Description</th>
             <th>Price</th>
@@ -19,6 +20,7 @@
         @foreach (var purchasedService in Model)
         {
             <tr>
+                
                 <td>@purchasedService.ServiceName</td>
                 <td>@purchasedService.ServiceDescription</td>
                 <td>@purchasedService.ServicePrice Dt</td>

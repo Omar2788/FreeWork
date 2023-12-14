@@ -40,17 +40,27 @@
                 <input asp-for="prixService" class="form-control" />
                 <span asp-validation-for="prixService" class="text-danger"></span>
             </div>
+                
+                
+                
                 <div class="form-group">
-                    <label asp-for="imageService" class="control-label">Service Photo</label>
-                    <input asp-for="ImageFile" type="file" class="form-control" />
-                    <span asp-validation-for="imageService" class="text-danger"></span>
+                    <label asp-for="imageService" class="control-label">Image du service</label>
+                    <input asp-for="ImageFile" type="file" class="form-control" id="imageInput" onchange="previewImage()" />
+                    <img id="imagePreview" src="#" alt="Service Image" style="max-width: 200px; display: none;margin: 20px;" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="etatService" class="control-label">Service Status</label>
-                    <select asp-for="etatService" class="form-control">
-                        <option value="dispo">Available</option>
-                        <option value="Not available">Not available</option>
-                    </select>
+                    <div class="form-check">
+                        <input asp-for="etatService" class="form-check-input" type="radio" value="Available" checked />
+                        <label class="form-check-label">Available</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input asp-for="etatService" class="form-check-input" type="radio" value="Not-Available" />
+                        <label class="form-check-label">Not Available</label>
+                    </div>
+
                     <span asp-validation-for="etatService" class="text-danger"></span>
                 </div>
             <div class="form-group" style="margin-top:10px;">
@@ -80,4 +90,22 @@
         }
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function previewImage() {
+            var fileInput = document.getElementById('imageInput');
+            var imagePreview = document.getElementById('imagePreview');
+
+            if (fileInput.files && fileInput.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+    </script>
 }
+

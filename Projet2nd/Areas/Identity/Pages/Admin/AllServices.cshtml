@@ -7,8 +7,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <style>
+        .user-section {
+            margin-top: 40px;
+        }
+
+        .user-card {
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+            .user-card:hover {
+                transform: scale(1.02);
+            }
+
+        .user-card-body {
+            padding: 15px;
+        }
+
+        .user-card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .user-card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .btn-delete-user {
+            background-color: red;
+            border-color: red;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f8f9fa;
@@ -104,14 +143,16 @@
 
     <div class="container">
         <h3>Hello Administrator! This is all the services in your platform</h3>
-
+        <div class="user-management-link" style="margin:10px;">
+            <a asp-page="./UserManagement" class="btn btn-primary">User Management</a>
+        </div>
         @if (Model.Services.Any())
         {
             <div class="row">
                 @foreach (var service in Model.Services)
                 {
                     <div class="col-md-4 mb-3">
-                        <div class="card">
+                        <div class="card h-100">
                             <img src="@Url.Content($"~/uploads/{service.imageService}")" class="card-img-top" alt="Service Image">
                             <div class="card-body">
                                 <h5 class="card-title">@service.nameService</h5>
@@ -130,6 +171,7 @@
         {
             <p>No services available.</p>
         }
+      
     </div>
 
 </body>

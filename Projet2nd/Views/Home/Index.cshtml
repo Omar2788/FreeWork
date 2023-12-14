@@ -14,7 +14,7 @@
     @foreach (var service in Model)
     {
         <div class="col-md-4 mb-3">
-            <div class="card">
+                <div class="card h-100">
                     <img src="@Url.Content($"~/uploads/{service.imageService}")" class="card-img-top" alt="Service Image" style="height: 250px; width: 300px;margin-left: auto;margin-right: auto;">
                 <div class="card-body">
                     <h5 class="card-title">@service.nameService</h5>
@@ -23,7 +23,7 @@
                     <p class="card-text">Status: @service.etatService</p>
                         <form action="@Url.Action("Details", "Home",new { id = service.IdService })" method="get">
                             <input type="hidden" name="serviceId" value="@service.IdService" />
-                            @if (!ViewBag.IsVendeur)
+                            @if (!ViewBag.IsVendeur && service.etatService=="Available")
                             {
                                 <button type="submit" class="btn btn-outline-dark"><i class="bi bi-bag"></i> Buy</button>
                             }
