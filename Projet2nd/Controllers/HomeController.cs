@@ -44,28 +44,23 @@ public class HomeController : Controller
 
             if (isVendeur)
             {
-                // Redirect for vendeur
                 return RedirectToAction("VendeurAction", new { serviceId = serviceId });
             }
             else
             {
-                // Check if the user is already in the "acheteur" role
                 if (User.IsInRole("acheteur"))
                 {
-                    // Redirect for buyer
                     return RedirectToAction("BuyerAction", new { serviceId = serviceId });
                 }
                 else
                 {
-                    // User is authenticated but not in the "vendeur" or "acheteur" role
-                    // Redirect to the login page
                     return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("BuyAction", "Home", new { serviceId = serviceId }) });
                 }
             }
         }
         else
         {
-            // User is not authenticated, redirect to login
+
             return RedirectToAction("Login", "Account", new { returnUrl = Url.Action("BuyAction", "Home", new { serviceId = serviceId }) });
         }
     }
